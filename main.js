@@ -8,27 +8,32 @@ const scene = new THREE.Scene();
 
 //Add objects to the scene
 const cubeGeometry = new THREE.BoxGeometry(1,1,1);
+
+//this geometry made for sphere
+const sphereGeometry = new THREE.SphereGeometry(.5,25,25)
 const cubeMaterial = new THREE.MeshBasicMaterial({color:"red"});
-const cubeMaterial2 = new THREE.MeshBasicMaterial({color:"blue"});
-const cubeMaterial3 = new THREE.MeshBasicMaterial({color:"yellow"});
+const sphereMaterial = new THREE.MeshBasicMaterial({color:"blue"});
+const cubeMaterial2 = new THREE.MeshBasicMaterial({color:"yellow"});
 
 // created 3 cubes with same Geomatry and different Material
 
 const cubeMesh = new THREE.Mesh(cubeGeometry,cubeMaterial);
-const cubeMesh2 = new THREE.Mesh(cubeGeometry,cubeMaterial2);
-const cubeMesh3 = new THREE.Mesh(cubeGeometry,cubeMaterial3);
+const sphereMesh = new THREE.Mesh(sphereGeometry,sphereMaterial);
+const cubeMesh3 = new THREE.Mesh(cubeGeometry,cubeMaterial2);
 
 // now we are positoning the mesh
 
 cubeMesh.position.x=0;
-cubeMesh2.position.x=2;
+sphereMesh.position.x=2;
 cubeMesh3.position.x=-2;
+
+cubeMesh3.rotation.x=1;
 
 // created group for the scene
 
 const groupMesh = new THREE.Group();
 groupMesh.add(cubeMesh);
-groupMesh.add(cubeMesh2);
+groupMesh.add(sphereMesh);
 groupMesh.add(cubeMesh3);
 
 // scene.add(cubeMesh) because now we are adding group of mesh 
@@ -79,16 +84,16 @@ window.addEventListener('resize',() =>{
 
 //initilaize the control
 
-const controls = new OrbitControls(camera,canvas)
-controls.enableDamping=true
-controls.autoRotate=false
+const controls = new OrbitControls(camera,canvas);
+controls.enableDamping=true;
+controls.autoRotate=false;
 
 const renderloop=() =>{
-  controls.update()
-  renderer.render(scene,camera)
-  window.requestAnimationFrame(renderloop)
+  controls.update();
+  renderer.render(scene,camera);
+  window.requestAnimationFrame(renderloop);
 }
-renderloop()
+renderloop();
 
 
 
